@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* 1. THE NUCLEAR OPTION: Hide all default arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important; /* Firefox */
+  appearance: none !important;
+}
+
+/* 2. CUSTOM SCROLLBAR (Black Themed) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F1115;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2D35;
+  border-radius: 10px;
+  border: 2px solid #0F1115;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F444E;
+}
