@@ -18,14 +18,18 @@
     },
     {
       "src": "/assets/(.*)",
-      "dest": "/frontend/assets/$1"
+      "dest": "/frontend/dist/assets/$1"
+    },
+    {
+      "src": "/preview/(.*)",
+      "dest": "/frontend/dist/preview/$1"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/index.html"
+      "dest": "/frontend/dist/index.html"
     }
   ]
 }
