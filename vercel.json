@@ -14,18 +14,14 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/server.js"
+      "dest": "/backend/server.js"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/dist/$1"
-    },
-    {
-      "src": "/",
-      "dest": "frontend/dist/index.html"
+      "dest": "/frontend/index.html"
     }
-  ],
-  "env": {
-    "BACKEND_URL": "@backend_url"
-  }
+  ]
 }
