@@ -37,7 +37,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Define routes
-app.use('/convert', convertRoutes);
+app.use('/api/convert', convertRoutes);
 
 // Health check endpoint
 app.get('/', (req, res) => {
