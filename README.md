@@ -156,8 +156,8 @@ VITE_API_URL=/api
 ## 1️⃣ Clone repo
 
 ```bash
-git clone https://github.com/yourusername/currency-main-app.git
-cd currency-main-app
+git clone https://github.com/MrAsacker/Multi-Asset-Converter.git
+cd  Multi-Asset-Converter
 ```
 
 ## 2️⃣ Install dependencies
