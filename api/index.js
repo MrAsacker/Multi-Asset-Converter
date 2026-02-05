@@ -13,6 +13,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
+  'https://multi-asset-converter.vercel.app',
   process.env.FRONTEND_URL, 
 ];
 
@@ -36,12 +37,13 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Define routes
-app.use('/api/convert', convertRoutes);
+app.use('/convert', convertRoutes);
 
 // Health check endpoint
 app.get('/', (req, res) => {
   res.send('✅ Backend is running and healthy!');
 });
 
-// Export as Vercel serverless function handler
+// Export as Vercel serverless function
 module.exports = app;
+
