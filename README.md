@@ -93,16 +93,19 @@ Convert:
 # 📁 Project Structure
 
 ```
-Currency-main-app/
+Multi-Asset-Converter/
 │
-├── backend/
+├── api/                       # Serverless API for Vercel
 │   ├── server.js              # Express server
-│   ├── .env                   # API keys
+│   ├── package.json           # API dependencies
 │   └── src/
 │       ├── api/
 │       │   └── convert.js     # Conversion route
 │       └── lib/
 │           └── coinbase.js    # Coinbase API logic
+│
+├── backend/                   # Original backend (local dev)
+│   └── ...
 │
 ├── frontend/
 │   ├── Components/
@@ -130,24 +133,26 @@ Currency-main-app/
 
 # ⚙️ Environment Variables
 
-## Backend `.env`
+## Backend `.env` (for local development)
 
 ```
 PORT=5000
-COINBASE_API=https://api.coinbase.com/v2/exchange-rates
+FRONTEND_URL=http://localhost:5173
 ```
 
 ## Frontend `.env`
 
 ```
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5000
 ```
 
 For production (Vercel):
 
 ```
-VITE_API_URL=/api
+VITE_API_URL=
 ```
+
+**Note:** Leave `VITE_API_URL` empty in production to use relative paths.
 
 ---
 
@@ -162,36 +167,36 @@ cd  Multi-Asset-Converter
 
 ## 2️⃣ Install dependencies
 
-### Backend
+### API (Backend)
 
 ```bash
-cd backend
-pnpm install
+cd api
+yarn install
 ```
 
 ### Frontend
 
 ```bash
 cd ../frontend
-pnpm install
+yarn install
 ```
 
 ---
 
 ## 3️⃣ Run locally
 
-### Start backend
+### Start API
 
 ```bash
-cd backend
-pnpm start
+cd api
+yarn start
 ```
 
 ### Start frontend
 
 ```bash
 cd frontend
-pnpm dev
+yarn dev
 ```
 
 App runs at:
@@ -204,21 +209,24 @@ http://localhost:5173
 
 # 🌍 API Endpoint
 
-### Convert Currency
+### Get Exchange Rates
 
 ```
-GET /api/convert?from=BTC&to=USD&amount=1
+GET /api/convert?base=USD
 ```
 
 ### Response
 
 ```json
 {
-  "from": "BTC",
-  "to": "USD",
-  "amount": 1,
-  "converted": 67952.30,
-  "rate": 67952.30
+  "success": true,
+  "base": "USD",
+  "rates": {
+    "BTC": 0.00001448,
+    "EUR": 0.84625,
+    "GBP": 0.73457,
+    ...
+  }
 }
 ```
 
@@ -239,11 +247,17 @@ npm i -g vercel
 vercel
 ```
 
-Set environment variables in Vercel dashboard:
+Or connect your GitHub repo to Vercel for automatic deployments.
 
-```
-BACKEND_URL
-```
+### Environment Variables
+
+Set these in your Vercel dashboard:
+
+| Variable | Value | Environment |
+|----------|-------|-------------|
+| `FRONTEND_URL` | `https://your-project.vercel.app` | Production |
+| `VITE_API_URL` | *(empty)* | Production |
+| `NODE_ENV` | `production` | Production |
 
 ---
 
