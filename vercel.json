@@ -1,8 +1,8 @@
 {
   "version": 2,
   "framework": "vite",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build",
+  "installCommand": "yarn install",
+  "buildCommand": "yarn build",
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
