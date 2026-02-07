@@ -6,37 +6,17 @@ const express = require('express');
 const cors = require('cors');
 const convertRoutes = require('./src/api/convert');
 
+console.log('Server starting...');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('VERCEL_URL:', process.env.VERCEL_URL);
+
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Define which origins (websites) are allowed to call our API
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  process.env.FRONTEND_URL,
-  // Allow Vercel preview/production URLs
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
-].filter(Boolean);
-
-// CORS configuration
+// CORS - Allow all origins for now
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Allow all Vercel URLs (preview and production)
-    if (origin && origin.includes('vercel.app')) {
-      return callback(null, true);
-    }
-    
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log("Blocked by CORS:", origin); // Helpful for debugging
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true,
   credentials: true,
 };
 
@@ -44,11 +24,17 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Define routes
-app.use('/api/convert', convertRoutes);
+// Note: /api prefix is already handled by Vercel rewrite
+app.use('/convert', convertRoutes);
 
 // Health check endpoint
 app.get('/', (req, res) => {
   res.send('✅ Backend is running and healthy!');
+});
+
+// API info endpoint
+app.get('/api', (req, res) => {
+  res.json({ message: 'API is working', endpoints: ['/api/convert'] });
 });
 
 // 👇 THE IMPORTANT CHANGE FOR VERCEL 👇
