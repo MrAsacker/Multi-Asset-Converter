@@ -1,7 +1,6 @@
 {
   "version": 2,
   "framework": "vite",
-  "installCommand": "cd api && pnpm install",
   "buildCommand": "cd frontend && pnpm install && pnpm run build",
   "outputDirectory": "frontend/dist",
   "rewrites": [
