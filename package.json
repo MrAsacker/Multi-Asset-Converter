@@ -1,0 +1,9 @@
+{
+  "name": "multi-asset-converter-root",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "cd frontend && pnpm install && pnpm run build && cd ../api && pnpm install"
+  }
+}
