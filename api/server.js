@@ -24,8 +24,12 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Define routes
-// Note: /api prefix is already handled by Vercel rewrite
+// Note: When using builds, Vercel passes the path after /api
+// So /api/convert becomes just /convert
 app.use('/convert', convertRoutes);
+
+// Also handle the full path for safety
+app.use('/api/convert', convertRoutes);
 
 // Health check endpoint
 app.get('/', (req, res) => {
