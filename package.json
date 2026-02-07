@@ -1,0 +1,8 @@
+{
+  "name": "multi-asset-converter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "vercel-build": "cd frontend && pnpm install && pnpm run build && cd ../backend && pnpm install"
+  }
+}
